@@ -22,7 +22,10 @@ RUN java -version
 copy ./target/*.war /opt/tomcat/webapps/
 
 
+#setting user name and password 
 ADD ./tomcat-conf/tomcat-users.xml /opt/tomcat/conf/
+
+#allow to connect from remote host
 ADD ./tomcat-conf/context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
 
 WORKDIR /opt/tomcat/webapps
