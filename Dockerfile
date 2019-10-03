@@ -1,11 +1,13 @@
 FROM centos
 arg TOMCAT_VERSION=8.5.46
 
-RUN mkdir /opt/tomcat/
 
+RUN mkdir /opt/tomcat/
 WORKDIR /opt/tomcat
+
 #https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.46/bin/apache-tomcat-8.5.46-deployer.tar.gz
 RUN curl -o apache-tomcat-${TOMCAT_VERSION}.tar.gz https://www-eu.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz
+
 RUN tar xvfz apache-tomcat-${TOMCAT_VERSION}.tar.gz
 RUN mv apache-tomcat-${TOMCAT_VERSION}/* /opt/tomcat/.
 
@@ -16,10 +18,12 @@ RUN rm -f apache-tomcat-${TOMCAT_VERSION}.tar.gz
 RUN yum -y install java
 RUN java -version
 
-copy ./target/xxx.war /opt/tomcat/webapps/
+#files with was extension in folder ./target will be deploy inside container 
+copy ./target/*.war /opt/tomcat/webapps/
 
-ADD tomcat-users.xml /opt/tomcat/conf/
-ADD context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
+
+ADD ./tomcat-conf/tomcat-users.xml /opt/tomcat/conf/
+ADD ./tomcat-conf/context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
 
 WORKDIR /opt/tomcat/webapps
 
