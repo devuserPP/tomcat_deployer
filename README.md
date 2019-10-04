@@ -2,7 +2,7 @@
 <h3>Quick solution for deploy war file</h3>
 
 
-<img src="media/traefik-ci.jpg?sanitize=true&raw=true" width="500"/>
+
 <p><h4>Installation Prerequisites:</h4></p>
 
 <b>Install Docker Community Edition (CE)</b>
