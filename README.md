@@ -1,5 +1,5 @@
 # tomcat_deployer
-<h3>Quick solution for deploy war file/h3>
+<h3>Quick solution for deploy war file</h3>
 
 
 <img src="media/traefik-ci.jpg?sanitize=true&raw=true" width="500"/>
