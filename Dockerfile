@@ -1,9 +1,16 @@
-FROM centos
-arg TOMCAT_VERSION=8.5.46
+
+##// set a default in case the ARG isn't passed during $docker run -build
+ARG TOMCAT_VERSION=8.5.46
+ARG MY_DOCKER_IMAGE_FROM=centos:centos8
+
+FROM ${MY_DOCKER_IMAGE_FROM}
+ARG TOMCAT_VERSION
+ARG MY_DOCKER_IMAGE_FROM
 
 
 RUN mkdir /opt/tomcat/
 WORKDIR /opt/tomcat
+
 
 #https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.46/bin/apache-tomcat-8.5.46-deployer.tar.gz
 RUN curl -o apache-tomcat-${TOMCAT_VERSION}.tar.gz https://www-eu.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz
@@ -22,7 +29,7 @@ RUN java -version
 copy ./target/*.war /opt/tomcat/webapps/
 
 
-#setting user name and password 
+#setting user TOMCAT_VERSION and password 
 ADD ./tomcat-conf/tomcat-users.xml /opt/tomcat/conf/
 
 #allow to connect from remote host
