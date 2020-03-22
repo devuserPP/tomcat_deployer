@@ -4,12 +4,11 @@
 # if not update TOMCAT_VERSION in file ./docker.ver
 
 
-FROM ${MY_DOCKER_IMAGE_FROM}
-
-
-ARG TOMCAT_VERSION
 ARG MY_DOCKER_IMAGE_FROM
 
+FROM ${MY_DOCKER_IMAGE_FROM}
+
+ARG TOMCAT_VERSION
 
 
 RUN mkdir /opt/tomcat/
