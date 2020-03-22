@@ -1,20 +1,22 @@
 
-##// set a default in case the ARG isn't passed during $docker run -build
-ARG TOMCAT_VERSION=8.5.46
-ARG MY_DOCKER_IMAGE_FROM=centos:centos8
+# check if this version still exists
+# https://downloads.apache.org/tomcat/tomcat-8/v8.5.53/bin/apache-tomcat-8.5.53.tar.gz
+# if not update TOMCAT_VERSION in file ./docker.ver
+
 
 FROM ${MY_DOCKER_IMAGE_FROM}
+
+
 ARG TOMCAT_VERSION
 ARG MY_DOCKER_IMAGE_FROM
+
 
 
 RUN mkdir /opt/tomcat/
 WORKDIR /opt/tomcat
 
 
-#https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.46/bin/apache-tomcat-8.5.46-deployer.tar.gz
-RUN curl -o apache-tomcat-${TOMCAT_VERSION}.tar.gz https://www-eu.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz
-
+RUN curl -o apache-tomcat-${TOMCAT_VERSION}.tar.gz https://downloads.apache.org/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz 
 RUN tar xvfz apache-tomcat-${TOMCAT_VERSION}.tar.gz
 RUN mv apache-tomcat-${TOMCAT_VERSION}/* /opt/tomcat/.
 
@@ -40,6 +42,3 @@ WORKDIR /opt/tomcat/webapps
 EXPOSE 8080
 
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
-
-#$docker build -t my-calculator . 
-#$docker container run -it --publish 3333:8080 my-calculator 
