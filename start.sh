@@ -47,6 +47,6 @@ docker run --rm -d --name ${MY_DOCKER_CONTAINER_NAME} -p ${MY_DOCKER_CONTAINER_P
 
 fi
 
-#for tesint purposes
-#   if I want listing all build arguments from file like variables and check i.e. correct url for TOMCAT
+#for testing purposes
+#   if I want listing all build arguments from file like variables and check like correct url for TOMCAT
 #   docker build $(for i in `cat docker.ver`; do out+="--build-arg $i " ; done; echo $out;out="") --pull --no-cache -t ${MY_DOCKER_IMAGE_NAME} .
